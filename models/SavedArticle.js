@@ -9,15 +9,27 @@ var SavedArticleSchema = new Schema({
   // `title` is required and of type String
   title: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
+
   // `link` is required and of type String
   link: {
     type: String,
     required: true
   },
 
-  username: {
+  imageLink: {
+    type: String,
+    required: false
+  },
+
+  summary : {
+    type: String,
+    required: false
+  },
+
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "User"
   },

@@ -1,0 +1,11 @@
+{{> nav-block}}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      {{#each savedArticle}}
+      {{> saved-articles-block}}
+      {{/each}}
+    </div>
+  </div>
+</div>
+{{> login-modal-block}}

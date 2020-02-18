@@ -19,27 +19,47 @@ var UserSchema = new Schema({
     required: "Username is Required",
     trim: true,
     unique: true,
-    minlength: (1, "Not long enough")
+    validate: [
+      function(input) {
+        return input.length >= 1;
+      },
+      "not long enough."
+    ]
   },
 
   firstName: {
     type: String,
     trim: true,
     required: "First Name is Required",
-    minlength: (1, "Not long enough")
+    validate: [
+      function(input) {
+        return input.length >= 1;
+      },
+      "not long enough."
+    ]
   },
 
   lastName: {
     type: String,
     trim: true,
     required: "Last Name is required",
-    minlength: (1, "Not long enough")
+    validate: [
+      function(input) {
+        return input.length >= 1;
+      },
+      "not long enough."
+    ]
   },
   // `password` is required and of type String
   password: {
     type: String,
     required: true,
-    minlength: (6, "Not long enough")
+    validate: [
+      function(input) {
+        return input.length >= 6;
+      },
+      "Password not long enough."
+    ]
   },
  
   comments: [
@@ -74,6 +94,24 @@ UserSchema.methods.setFullName = function() {
 UserSchema.methods.lastUpdatedDate = function() {
   this.lastUpdated = Date.now();
   return this.lastUpdated;
+};
+
+UserSchema.pre("save", function(next) {
+  let user = this;
+  if(!user.isModified("password")) return next();
+
+  bcrypt.genSalt(12, (err, salt) => {
+      if(err) return next(err);
+      bcrypt.hash(user.password, salt, (err, hash) => {
+          if(err) return next(err);
+          user.password = hash;
+          next();
+      });
+  });
+});
+
+UserSchema.methods.comparePassword = function(enteredPassword) {
+  return bcrypt.compareSync(enteredPassword, this.password);
 };
 
 

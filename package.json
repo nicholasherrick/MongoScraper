@@ -2,7 +2,7 @@
   "name": "MongoScraper",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,8 +26,10 @@
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
     "flash": "^1.1.0",
+    "handlebars-helpers": "^0.10.0",
     "mongoose": "^5.8.11",
     "morgan": "^1.9.1",
-    "passport": "^0.4.1"
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   }
 }

@@ -11,11 +11,23 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
+
   // `link` is required and of type String
   link: {
     type: String,
     required: true
   },
+
+  imageLink: {
+    type: String,
+    required: false
+  },
+  
+  summary : {
+    type: String,
+    required: false
+  }
+
 });
 
 // This creates our model from the above schema, using mongoose's model method

@@ -1,0 +1,16 @@
+<div class="mt-4 mb-3" data-id="{{_id}}">
+    <h2>{{title}}</h2>
+    <a href="https://thehill.com{{link}}" target="_blank"><button type="button" class="btn btn-info">Go To Article</button></a>
+    <button data-id="{{_id}}" type="button" class="add-comment-button btn btn-dark" data-toggle="modal" data-target="#exampleModal2">Add Comment</button>
+    {{#if comments}}<button data-id="{{_id}}" type="button" class="view-comments-button btn btn-warning">View/Hide Comments</button>{{/if}}
+    <button data-id="{{_id}}" type="button" class="delete-forum-button btn btn-danger">Remove From Forum</button>
+    <div id="{{_id}}" class="comment">
+        {{#each comments}}
+            {{#eq ../user.username username}}<button data-commentid="{{_id}}" type="button" class="close delete-comment" aria-label="Close" data-toggle="tooltip" data-placement="left" title="delete comment"><span aria-hidden="true">&times;</span></button>{{/eq}}
+            <p class="font-weight-bold">Posted by {{fullName}} ({{username}}):</p>
+            <p>{{body}}</p>
+            <hr>
+        {{/each}}
+    </div>
+    <hr>
+</div>

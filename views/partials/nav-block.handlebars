@@ -1,29 +1,43 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Hill Scraper</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+  <a class="navbar-brand" href="/"><button type="button" class="btn btn-light">The Hill Scraper</button></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      {{#if user}}
+      <li class="nav-item">
+        <a class="nav-link" href="/saved-articles"><button type="button" class="btn btn-light">My Saved
+            Articles</button></a>
+      </li>
+      {{/if}}
+      {{#if user}}
+      <li class="nav-item">
+        <a class="nav-link" href="/forum-articles"><button type="button" class="btn btn-light">Forum
+            Articles</button></a>
+      </li>
+      {{/if}}
+      <li class="nav-item">
+        <a class="nav-link" href="/api/scrape"><button type="button" class="btn btn-success">Scrape New
+            Articles</button></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">My Saved Articles</a>
+        <a class="nav-link" href="/api/clear"><button type="button" class="btn btn-danger">Clear Articles</button></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Forum Articles</a>
+        {{#if user}}
+        <a class="nav-link" href="/api/logout"><button type="button" class="btn btn-secondary">Logout</button></a>
+        {{else}}
+        <a class="nav-link"><button type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#exampleModal">Login/Register</button></a>
+        {{/if}}
       </li>
+      {{#if user}}
       <li class="nav-item">
-        <a class="nav-link" href="#"><button type="button" class="btn btn-success">Scrape New Articles</button></a>
+        <p class="nav-link">Logged in as {{user.username}}</p>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><button type="button" class="btn btn-danger">Clear Articles</button></a>
-      </li>
-      <li class="nav-item">
-          <p class="nav-link">Logged in as fart face</p>
-      </li>
-      
+      {{/if}}
     </ul>
   </div>
 </nav>

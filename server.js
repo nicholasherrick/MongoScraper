@@ -4,8 +4,6 @@ var exphbs = require("express-handlebars");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var passport = require("passport");
-var axios = require("axios");
-var cheerio = require("cheerio");
 var db = require("./models");
 var flash = require("flash");
 
@@ -14,7 +12,7 @@ var PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(logger("dev"));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(
@@ -29,13 +27,20 @@ app.use(passport.session());
 app.use(flash());
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, 
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  });
 
 // Handlebars
 app.engine(
   "handlebars",
   exphbs({
-    defaultLayout: "main"
+    defaultLayout: "main",
+    helpers: require("handlebars-helpers")()
   })
 );
 app.set("view engine", "handlebars");

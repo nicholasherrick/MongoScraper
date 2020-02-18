@@ -1,0 +1,12 @@
+body {
+    background-image: url(/img/herringbone.png);
+}
+
+.comment {
+    display: none;
+    word-wrap: break-word;
+}
+
+.navbar-custom {
+    background-color: #2a53c1;
+}
